@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[使用GitHub搭建一个自己的hexo博客]]></title>
+    <url>%2F2019%2F07%2F08%2F%E4%BD%BF%E7%94%A8GitHub%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84hexo%E5%8D%9A%E5%AE%A2%2F</url>
+    <content type="text"><![CDATA[写在前面一直想搭建一个个人博客，无奈有拖延症，一直拖到现在。为什么开始做了呢？一个人还贷，压力很大，为了防止剁手，给自己找点事做。于是，兜兜转转又回到搭建博客的事，来来回回看了很多静态博客(纠结症)，比如docsify、VuePress等等，最终还是选择了hexo，毕竟这也算是我静态博客的启蒙，不能忘本，第一个系列当然给Hexo. 本地部署过程环境使用的系统是二手Mac，关于node、npm、git等的安装，还有 github的配置在这里先不展开，以后抽空补上。 安装 hexo 客户端1npm install -g hexo-cli 创建hexo的文件夹(文件夹名称hexo可修改为其他)12cd hexo # hexo 改为自己命名的文件夹名称hexo init # hexo 初始化 选择主题hexo本身自带 landscape 主题，不过个人觉得比较丑，改为了比较简约的next 主题。接下来主题均基于next主题 下载主题1git clone https://github.com/iissnan/hexo-theme-next 修改 theme编辑 hexo/_config.yml，找到 theme 那一行配置，修改为 next 本地启动看看安装完之后，我们可以在本地启动看看博客初始化的效果。 生成静态文件1hexo g hexo 最终运行的是静态文件，包括js，css和html等，这些文件统一放在 public 文件夹。 安装 hexo-server1npm install hexo-server --save 启动 server1hexo s 在浏览器打开 localhost:4000，会看到一个 Hello World的页面。恭喜你，部署成功。 添加“分类”，“关于”和“标签”菜单到此已经把博客安装好了，不过要想看起来更好点，还需要做些其他配置。 取消 tags、about、categories 注释在主题配置文件next/_config.yml 在menu下去掉tags、about、categories 注释。 创建 tags，about，categories在 hexo 文件夹下执行以下shell命令 1hexo new page tags 会在 source 文件夹生成 tags 文件夹，编辑里面的 index.md ，添加 12type: &quot;tags&quot;comments: false 安装同样操作即可添加 categories；添加about相对简单，不需要修改 md 文件的 type，因为tags、categories是特殊目录类型，about只是简单的一个 md。 为文章添加标签和分类在文章 md 文件开头 title 的下面，增加类似，就可以归类到tag和 category 123456789101112131415tags: #文章标签可，空，多标签请用格式[tag1,tag2,tag3]，如下，注意!!&quot;tags:&quot;后面有个空格tags: [tag1, tag2, tag3, ...]# 下面这种方式似乎仅限于hexo 3.0，应该包括以上吧...tags: - tags1- tags2- ...# 这种方式似乎仅限于hexo 3.0，应该包括以上吧...categories: - tags_level_1- tags_level_2- tags_level_3- ... 添加头像图片在 hexo/_config.yml 找到配置 avatar，增加图片路径，注意图片类型要对的上。 1avatar: /images/avatar.jpeg 新建文章1hexo new post new1 就会在 source/_post 文件夹下生成 new1.md 文件，编辑 md 文件即可。这里为什么是 post ？这里涉及 hexo 的模版行为，在 scaffolds 目录下初始定义了3个模板，draft、page、post，文章就是用到了 post。 小结这些配置完成之后，可重新启动server，本地访问http://localhost:4000查看具体效果，接下来几篇将会记录一下部署到github以及next主题的相关配置，以防记性不好，最近老是健忘。 参考资料http://durant35.github.io/2016/07/16/hexo_hexo%E5%88%86%E7%BA%A7%E7%9B%AE%E5%BD%95%E4%B8%8E%E5%A4%9A%E6%A0%87%E7%AD%BE/https://github.com/hexojs/hexohttps://albenw.github.io/posts/3454819c/]]></content>
+      <categories>
+        <category>静态博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Hello World]]></title>
     <url>%2F2019%2F06%2F25%2Fhello-world%2F</url>
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
