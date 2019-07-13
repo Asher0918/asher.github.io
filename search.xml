@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[更新记录]]></title>
+    <url>%2Fposts%2F77b56474%2F</url>
+    <content type="text"><![CDATA[时间更新说明2019-07-13内容补充：更新记录2019-07-13功能添加：点击效果2019-07-05功能优化：博客链接2019-07-03内容补充：关于我2019-07-02功能添加：网站运行时间2019-07-01功能添加：文字统计、阅读时间统计2019-06-25功能添加：Hexo博客初始化。]]></content>
+      <categories>
+        <category>Muhouer&#39;s blog</category>
+      </categories>
+      <tags>
+        <tag>更新记录</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Hexo博客SEO优化之链接优化]]></title>
     <url>%2Fposts%2Fa8db5a9b%2F</url>
     <content type="text"><![CDATA[写在前面默认的permalinkpermalink: :year/:month/:day/:title/缺点如下命名方式层次过多，爬虫会嫌麻烦。对于中文命名，如果要引用自己的链接，会重新编码成好长一串，超级麻烦。中文链接在百度Google权重很低。解决办法有没有其他办法呢？实在想不出来了，还是因为我比较懒，喜欢现成的。皇天不负有心人，通过一番搜索，终于找到一个插件hexo-abbrlink。注意之前如果有做评论或访问计数配置的，会全部失效,一切重头开始。hexo-abbrlink实现思路对标题+时间进行md5然后再转base64，保存在front-matter中。如何安装添加插件到hexo:1npm install hexo-abbrlink --save修改config.yml文件中的永久链接：1permalink: posts/:abbrlink/ # “posts/” 可自行更换两种设置：alg - 算法（）rep - Represent（生成的链接可以以十六进制或十六进制值表示）1234# abbrlink configabbrlink: alg: crc32 # 算法(Algorithm):目前支持crc16和crc32，默认为crc16 rep: hex # 表示(Represent):生成的链接可以以十六进制或十进制值表示，默认十进制示例生成的链接如下所示:12345crc16 &amp; hexhttps://post.zz173.com/posts/66c8.htmlcrc16 &amp; dechttps://post.zz173.com/posts/65535.html12345crc32 &amp; hexhttps://post.zz173.com/posts/8ddf18fb.htmlcrc32 &amp; dechttps://post.zz173.com/posts/1690090958.html局限性crc16的最大帖子数为65535。(对于个人博客网站，这个数字还算不错)更多信息hexo-abbrlink介绍参考资料https://github.com/Rozbo/hexo-abbrlink#limitation]]></content>
