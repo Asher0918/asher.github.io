@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://muhouer.github.io/"/>
-  <updated>2019-07-13T12:28:29.561Z</updated>
+  <updated>2019-07-13T15:00:28.379Z</updated>
   <id>https://muhouer.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>test_echarts</title>
+    <link href="https://muhouer.github.io/posts/e93199a0/"/>
+    <id>https://muhouer.github.io/posts/e93199a0/</id>
+    <published>2019-07-13T14:56:00.000Z</published>
+    <updated>2019-07-13T15:00:28.379Z</updated>
+    
+    <content type="html"><![CDATA[<div id="echarts2834" style="width:81%;height:400px;margin:0 auto"></div><script type="text/javascript">var myChart=echarts.init(document.getElementById("echarts2834")),option={tooltip:{trigger:"axis"},legend:{data:["体重"]},toolbox:{show:!0,orient:"horizontal",x:"right",y:"top",color:["#1e90ff","#22bb22","#4b0082","#d2691e"],backgroundColor:"rgba(0,0,0,0)",borderColor:"#ccc",borderWidth:0,padding:5,showTitle:!0,feature:{mark:{show:!0,title:{mark:"辅助线-开关",markUndo:"辅助线-删除",markClear:"辅助线-清空"},lineStyle:{width:1,color:"#1e90ff",type:"dashed"}},dataZoom:{show:!0,title:{dataZoom:"区域缩放",dataZoomReset:"区域缩放-后退"}},dataView:{show:!0,title:"数据视图",readOnly:!0,lang:["数据视图","关闭","刷新"],optionToContent:function(e){for(var a=e.xAxis[0].data,l=e.series,n='<table style="width:100%;text-align:center"><tbody><tr><td>时间</td><td>'+l[0].name+"</td><td>"+l[1].name+"</td></tr>",t=0,m=a.length;t<m;t++)n+="<tr><td>"+a[t]+"</td><td>"+l[0].data[t]+"</td><td>"+l[1].data[t]+"</td></tr>";return n+="</tbody></table>"}},magicType:{show:!0,title:{line:"动态类型切换-折线图",bar:"动态类型切换-柱形图",stack:"动态类型切换-堆积",tiled:"动态类型切换-平铺"},type:["line","bar","stack","tiled"]},restore:{show:!0,title:"还原",color:"black"},saveAsImage:{show:!0,title:"保存为图片",type:"jpeg",lang:["点击本地保存"]},myTool:{show:!0,title:"自定义扩展方法",icon:"image://../asset/ico/favicon.png",onclick:function(){alert("myToolHandler")}}}},calculable:!0,dataZoom:{show:!0,realtime:!0,start:20,end:80},xAxis:{type:"category",boundaryGap:!1},yAxis:{type:"value",min:60},series:[{name:"体重",type:"line",data:[{name:"2019-02-10",value:["2019-02-10",65]},{name:"2019-03-10",value:["2019-03-10",67.5]},{name:"2019-03-23",value:["2019-03-23",68.75]},{name:"2019-03-24",value:["2019-03-24",68.25]},{name:"2019-03-30",value:["2019-03-30",69.35]},{name:"2019-04-01",value:["2019-04-01",67.8]},{name:"2019-04-02",value:["2019-04-02",67.3]},{name:"2019-04-07",value:["2019-04-07",67.9]},{name:"2019-04-09",value:["2019-04-09",68.9]},{name:"2019-04-11",value:["2019-04-11",69.05]},{name:"2019-04-12",value:["2019-04-12",68.3]},{name:"2019-04-14",value:["2019-04-14",67.2]},{name:"2019-04-15",value:["2019-04-15",69.25]},{name:"2019-04-18",value:["2019-04-18",68.35]},{name:"2019-04-22",value:["2019-04-22",68.4]},{name:"2019-04-23",value:["2019-04-23",67.75]},{name:"2019-04-24",value:["2019-04-24",68.45]},{name:"2019-04-26",value:["2019-04-26",67.5]},{name:"2019-04-27",value:["2019-04-27",67.6]},{name:"2019-04-28",value:["2019-04-28",67.65]},{name:"2019-04-29",value:["2019-04-29",67.1]},{name:"2019-04-30",value:["2019-04-30",66.75]},{name:"2019-05-02",value:["2019-05-02",68.5]},{name:"2019-05-04",value:["2019-05-04",66.4]},{name:"2019-05-07",value:["2019-05-07",68.3]},{name:"2019-05-08",value:["2019-05-08",67.7]},{name:"2019-05-09",value:["2019-05-09",67.35]},{name:"2019-05-11",value:["2019-05-11",66.6]},{name:"2019-05-12",value:["2019-05-12",67.4]},{name:"2019-05-13",value:["2019-05-13",66.95]},{name:"2019-05-14",value:["2019-05-14",67.55]},{name:"2019-05-16",value:["2019-05-16",67]},{name:"2019-05-18",value:["2019-05-18",68.4]},{name:"2019-05-19",value:["2019-05-19",66.4]},{name:"2019-05-20",value:["2019-05-20",67.4]},{name:"2019-05-21",value:["2019-05-21",66.8]},{name:"2019-05-22",value:["2019-05-22",67.65]},{name:"2019-05-23",value:["2019-05-23",67.4]},{name:"2019-05-24",value:["2019-05-24",67.5]},{name:"2019-05-25",value:["2019-05-25",67.4]},{name:"2019-05-26",value:["2019-05-26",67.4]},{name:"2019-05-27",value:["2019-05-27",67.3]},{name:"2019-05-28",value:["2019-05-28",67.4]},{name:"2019-05-30",value:["2019-05-30",65.95]},{name:"2019-06-02",value:["2019-06-02",66.95]},{name:"2019-06-03",value:["2019-06-03",67]},{name:"2019-06-04",value:["2019-06-04",67.5]},{name:"2019-06-05",value:["2019-06-05",68.35]},{name:"2019-06-06",value:["2019-06-06",67.6]},{name:"2019-06-07",value:["2019-06-07",67.9]},{name:"2019-06-09",value:["2019-06-09",67.55]},{name:"2019-06-11",value:["2019-06-11",67.25]},{name:"2019-06-13",value:["2019-06-13",67.6]},{name:"2019-06-14",value:["2019-06-14",67.25]},{name:"2019-06-15",value:["2019-06-15",66.7]},{name:"2019-06-16",value:["2019-06-16",66.15]},{name:"2019-06-18",value:["2019-06-18",67.5]},{name:"2019-06-19",value:["2019-06-19",65.55]},{name:"2019-06-22",value:["2019-06-22",67.5]},{name:"2019-06-23",value:["2019-06-23",66.8]},{name:"2019-06-26",value:["2019-06-26",67.55]},{name:"2019-06-28",value:["2019-06-28",66.75]},{name:"2019-06-29",value:["2019-06-29",66.2]},{name:"2019-07-03",value:["2019-07-03",68.45]},{name:"2019-07-05",value:["2019-07-05",68.35]},{name:"2019-07-07",value:["2019-07-07",67.75]},{name:"2019-07-08",value:["2019-07-08",69.2]},{name:"2019-07-10",value:["2019-07-10",68.75]},{name:"2019-07-11",value:["2019-07-11",68.15]}]}]};myChart.setOption(option)</script>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;div id=&quot;echarts2834&quot; style=&quot;width:81%;height:400px;margin:0 auto&quot;&gt;&lt;/div&gt;&lt;script type=&quot;text/javascript&quot;&gt;var myChart=echarts.init(document.ge
+      
+    
+    </summary>
+    
+      <category term="日常生活" scheme="https://muhouer.github.io/categories/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="体重" scheme="https://muhouer.github.io/tags/%E4%BD%93%E9%87%8D/"/>
+    
+  </entry>
   
   <entry>
     <title>更新记录</title>

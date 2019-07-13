@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[test_echarts]]></title>
+    <url>%2Fposts%2Fe93199a0%2F</url>
+    <content type="text"><![CDATA[var myChart=echarts.init(document.getElementById("echarts2834")),option={tooltip:{trigger:"axis"},legend:{data:["体重"]},toolbox:{show:!0,orient:"horizontal",x:"right",y:"top",color:["#1e90ff","#22bb22","#4b0082","#d2691e"],backgroundColor:"rgba(0,0,0,0)",borderColor:"#ccc",borderWidth:0,padding:5,showTitle:!0,feature:{mark:{show:!0,title:{mark:"辅助线-开关",markUndo:"辅助线-删除",markClear:"辅助线-清空"},lineStyle:{width:1,color:"#1e90ff",type:"dashed"}},dataZoom:{show:!0,title:{dataZoom:"区域缩放",dataZoomReset:"区域缩放-后退"}},dataView:{show:!0,title:"数据视图",readOnly:!0,lang:["数据视图","关闭","刷新"],optionToContent:function(e){for(var a=e.xAxis[0].data,l=e.series,n='时间'+l[0].name+""+l[1].name+"",t=0,m=a.length;t]]></content>
+      <categories>
+        <category>日常生活</category>
+      </categories>
+      <tags>
+        <tag>体重</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[更新记录]]></title>
     <url>%2Fposts%2F77b56474%2F</url>
     <content type="text"><![CDATA[时间更新说明2019-07-13内容补充：更新记录2019-07-13功能添加：点击效果2019-07-05功能优化：博客链接2019-07-03内容补充：关于我2019-07-02功能添加：网站运行时间2019-07-01功能添加：文字统计、阅读时间统计2019-06-25功能添加：Hexo博客初始化。]]></content>
