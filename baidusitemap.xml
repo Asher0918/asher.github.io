@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://muhouer.com/posts/d3b108fe/</loc>
+    <loc>https://muhouer.github.io/posts/a8db5a9b/</loc>
+    <lastmod>2019-07-13</lastmod>
+  </url>  <url>
+    <loc>https://muhouer.github.io/posts/d3b108fe/</loc>
     <lastmod>2019-07-11</lastmod>
   </url>  <url>
-    <loc>http://muhouer.com/posts/4a17b156/</loc>
+    <loc>https://muhouer.github.io/posts/4a17b156/</loc>
     <lastmod>2019-07-11</lastmod>
   </url>  <url>
-    <loc>http://muhouer.com/posts/9fe43db6/</loc>
+    <loc>https://muhouer.github.io/posts/9fe43db6/</loc>
     <lastmod>2019-07-11</lastmod>
   </url>
 </urlset>
