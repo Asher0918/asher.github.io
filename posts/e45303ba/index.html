@@ -1,0 +1,317 @@
+<!DOCTYPE html><html class="theme-next gemini use-motion" lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"><link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0"><link rel="stylesheet" href="/css/main.css?v=7.1.2"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.2"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2"><link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222"><script id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Gemini",version:"7.1.2",sidebar:{position:"left",display:"post",offset:12,onmobile:!1,dimmer:!1},back2top:!0,back2top_sidebar:!0,fancybox:!1,fastclick:!1,lazyload:!1,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.common.min.js"></script><meta name="description" content="Redis命令Redis 命令用于在 redis 服务上执行操作。要在 redis 服务上执行命令需要一个 redis 客户端。Redis 客户端在我们之前下载的的 redis 的安装包中。语法Redis 客户端的基本语法为：1$ redis-cli实例以下实例讲解了如何启动 redis 客户端：启动 redis 客户端，打开终端并输入命令 redis-cli。该命令会连接本地的 redis 服务"><meta name="keywords" content="Redis命令"><meta property="og:type" content="article"><meta property="og:title" content="Redis命令1"><meta property="og:url" content="https://muhouer.github.io/posts/e45303ba/index.html"><meta property="og:site_name" content="Muhouer"><meta property="og:description" content="Redis命令Redis 命令用于在 redis 服务上执行操作。要在 redis 服务上执行命令需要一个 redis 客户端。Redis 客户端在我们之前下载的的 redis 的安装包中。语法Redis 客户端的基本语法为：1$ redis-cli实例以下实例讲解了如何启动 redis 客户端：启动 redis 客户端，打开终端并输入命令 redis-cli。该命令会连接本地的 redis 服务"><meta property="og:locale" content="zh-CN"><meta property="og:updated_time" content="2019-07-30T16:33:52.208Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Redis命令1"><meta name="twitter:description" content="Redis命令Redis 命令用于在 redis 服务上执行操作。要在 redis 服务上执行命令需要一个 redis 客户端。Redis 客户端在我们之前下载的的 redis 的安装包中。语法Redis 客户端的基本语法为：1$ redis-cli实例以下实例讲解了如何启动 redis 客户端：启动 redis 客户端，打开终端并输入命令 redis-cli。该命令会连接本地的 redis 服务"><link rel="alternate" href="/atom.xml" title="Muhouer" type="application/atom+xml"><link rel="canonical" href="https://muhouer.github.io/posts/e45303ba/"><script id="page.configurations">CONFIG.page={sidebar:""}</script><title>Redis命令1 | Muhouer</title><noscript><style>.sidebar-inner,.use-motion .brand,.use-motion .collection-title,.use-motion .comments,.use-motion .menu-item,.use-motion .motion-element,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .logo,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style></noscript><script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">Muhouer</span> <span class="logo-line-after"><i></i></span></a></div><h1 class="site-subtitle" itemprop="description">就是做个记录，先来5分钟的！</h1></div><div class="site-nav-toggle"><button aria-label="切换导航栏"><span class="btn-bar"></span> <span class="btn-bar"></span> <span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>归档</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i><br>公益 404</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i> </span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"><input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><div class="reading-progress-bar"></div><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="https://muhouer.github.io/posts/e45303ba/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="Muhouer"><meta itemprop="description" content="斯人若彩红，遇上方知有有木有。"><meta itemprop="image" content="/images/avatar.jpeg"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="Muhouer"></span><header class="post-header"><h2 class="post-title" itemprop="name headline">Redis命令1</h2><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i> </span><span class="post-meta-item-text">发表于</span> <time title="创建时间：2019-07-30 22:29:00" itemprop="dateCreated datePublished" datetime="2019-07-30T22:29:00+08:00">2019-07-30</time> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-calendar-check-o"></i> </span><span class="post-meta-item-text">更新于</span> <time title="修改时间：2019-07-31 00:33:52" itemprop="dateModified" datetime="2019-07-31T00:33:52+08:00">2019-07-31</time> </span><span class="post-category"><span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-folder-o"></i> </span><span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a></span> ， <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Redis/学习笔记/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a></span> </span><span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-eye"></i> 阅读次数： <span class="busuanzi-value" id="busuanzi_value_page_pv"></span></span><div class="post-symbolscount"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i> </span><span class="post-meta-item-text">本文字数：</span> <span title="本文字数">6.3k</span> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-clock-o"></i> </span><span class="post-meta-item-text">阅读时长 &asymp;</span> <span title="阅读时长">6 分钟</span></div></div></header><div class="post-body" itemprop="articleBody"><h2 id="Redis命令"><a href="#Redis命令" class="headerlink" title="Redis命令"></a>Redis命令</h2><p>Redis 命令用于在 redis 服务上执行操作。</p><p>要在 redis 服务上执行命令需要一个 redis 客户端。Redis 客户端在我们之前下载的的 redis 的安装包中。</p><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>Redis 客户端的基本语法为：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> redis-cli</span></span><br></pre></td></tr></table></figure><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>以下实例讲解了如何启动 redis 客户端：</p><p>启动 redis 客户端，打开终端并输入命令 <strong>redis-cli</strong>。该命令会连接本地的 redis 服务。连接到本地的 redis 服务并执行 <strong>PING</strong> 命令，该命令用于检测 redis 服务是否启动。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> redis-cli</span></span><br><span class="line">127.0.0.1:6379&gt;</span><br><span class="line">127.0.0.1:6379&gt; ping</span><br><span class="line">PONG</span><br></pre></td></tr></table></figure><hr><h2 id="在远程服务上执行命令"><a href="#在远程服务上执行命令" class="headerlink" title="在远程服务上执行命令"></a>在远程服务上执行命令</h2><p>如果需要在远程 <code>Redis</code> 服务上执行命令，同样我们使用的也是 <strong><code>redis-cli</code></strong> 命令。和上面实例类似，上述命令执行的是默认参数，<code>host</code> 为 <code>127.0.0.1</code> ，<code>port</code>为 <code>6379</code>， 无需密码</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ redis-cli -h host -p port -a password</span><br></pre></td></tr></table></figure><h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><p>以下实例演示了如何连接到主机为 127.0.0.1，端口为 6379 ，密码为 mypass 的 redis 服务上。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> redis-cli -h 127.0.0.1 -p 6379 -a <span class="string">"mypass"</span></span></span><br><span class="line">127.0.0.1:6379&gt;</span><br><span class="line">127.0.0.1:6379&gt; ping</span><br><span class="line">PONG</span><br></pre></td></tr></table></figure><h3 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> redis-cli -h host -p port -a password</span></span><br></pre></td></tr></table></figure><h3 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h3><p>以下实例演示了如何连接到主机为 127.0.0.1，端口为 6379 ，密码为 mypass 的 redis 服务上。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> redis-cli -h 127.0.0.1 -p 6379 -a <span class="string">"mypass"</span></span></span><br><span class="line">127.0.0.1:6379&gt;</span><br><span class="line">127.0.0.1:6379&gt; ping</span><br><span class="line">PONG</span><br></pre></td></tr></table></figure><h2 id="Redis-键-key-相关命令"><a href="#Redis-键-key-相关命令" class="headerlink" title="Redis 键(key)相关命令"></a>Redis 键(key)相关命令</h2><p>Redis 键命令用于管理 redis 的键。</p><h3 id="语法-2"><a href="#语法-2" class="headerlink" title="语法"></a>语法</h3><p>Redis 键命令的基本语法如下：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; COMMAND KEY_NAME</span><br></pre></td></tr></table></figure><h3 id="实例-3"><a href="#实例-3" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="comment"># del 是一个命令， name 是一个键。如果键被删除成功，命令执行后输出 (integer) 1，否则将输出 (integer) 0</span></span></span><br><span class="line">127.0.0.1:6379&gt; set name redis</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; del name  </span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure><h3 id="Redis键相关的基本命令"><a href="#Redis键相关的基本命令" class="headerlink" title="Redis键相关的基本命令"></a>Redis键相关的基本命令</h3><table><thead><tr><th>命令</th><th>描述</th><th>可用版本</th></tr></thead><tbody><tr><td><code>del key</code></td><td>该命令用于在 key 存在时删除 key。返回被删除 key 的数量</td><td>&gt;= 1.0.0</td></tr><tr><td><code>dump key</code></td><td>该命令用于序列化给定 key 。如果 key 不存在，那么返回 nil 。 否则，返回序列化之后的值。</td><td>&gt;= 2.6.0</td></tr><tr><td><code>exists key</code></td><td>该命令用于检查给定 key 是否存在。若 key 存在返回 1 ，否则返回 0 。</td><td>&gt;= 1.0.0</td></tr><tr><td><code>expire key seconds</code></td><td>1. 该命令用于设置 key 的过期时间，key 过期后将不再可用。单位以秒计。设置成功返回 1 。 当 key 不存在或者不能为 key 设置过期时间时(比如在低于 2.1.3 版本的 Redis 中你尝试更新 key 的过期时间)返回 0 。在 Redis 2.1.3 之前的版本中，修改一个带有生存时间的 <code>key</code> 会导致整个 <code>key</code> 被删除，这一行为是受当时复制(replication)层的限制而作出的，现在这一限制已经被修复。<br>2. 在 Redis 2.4 版本中，过期时间的延迟在 1 秒钟之内 —— 也即是，就算 <code>key</code> 已经过期，但它还是可能在过期之后一秒钟之内被访问到，而在新的 Redis 2.6 版本中，延迟被降低到 1 毫秒之内。</td><td>&gt;= 1.0.0</td></tr><tr><td><code>pexpire key milliseconds</code></td><td>该命令和 <code>expire</code> 命令的作用类似，但是它以毫秒为单位设置 key 的生存时间。</td><td>&gt;= 2.6.0</td></tr><tr><td><code>expireat key timestamp</code></td><td>该命令用于以 UNIX 时间戳(unix timestamp)格式设置 key 的过期时间，单位以秒计。key 过期后将不再可用。设置成功返回 1 。当 key 不存在或者不能为 key 设置过期时间时返回 0 。</td><td>&gt;= 1.2.0</td></tr><tr><td><code>pexpireat key milliseconds-timestamp</code></td><td>该命令和<code>expireat</code>命令类似，但它以毫秒为单位设置 <code>key</code> 的过期 unix 时间戳。</td><td>&gt;= 2.6.0</td></tr><tr><td><code>keys pattern</code></td><td>1. 该命令用于查找所有符合给定模式 <code>pattern</code> 的 <code>key</code>。时间复杂度：O(N)， <code>N</code> 为数据库中 <code>key</code> 的数量。返回符合给定模式的 <code>key</code> 列表。<br>2. <code>keys</code>的速度非常快，但在一个大的数据库中使用它仍然可能造成性能问题，如果你需要从一个数据集中查找特定的 <code>key</code> ，你最好还是用 Redis 的集合结构(set)来代替。</td><td>&gt;= 1.0.0</td></tr><tr><td><code>move key db</code></td><td>1. 该命令用于将当前数据库的 <code>key</code> 移动到给定的数据库 <code>db</code> 当中。时间复杂度：O(1)。移动成功返回 1 ，失败则返回 0 。<br>2. 如果当前数据库(源数据库)和给定数据库(目标数据库)有相同名字的给定 <code>key</code> ，或者 <code>key</code> 不存在于当前数据库，那么 <code>MOVE</code> 没有任何效果。因此，也可以利用这一特性，将 <code>move</code>当作锁(locking)原语(primitive)。</td><td>&gt;= 1.0.0</td></tr><tr><td><code>persist key</code></td><td>该命令用于移除给定 <code>key</code> 的生存时间，将这个 <code>key</code> 从『易失的』(带生存时间 <code>key</code> )转换成『持久的』(一个不带生存时间、永不过期的 <code>key</code> )。时间复杂度：O(1)。当生存时间移除成功时，返回 1 .如果 key 不存在或 key 没有设置生存时间，返回 0 。</td><td>&gt;= 2.2.0</td></tr><tr><td><code>ttl key</code></td><td>1. 该命令以秒为单位返回 key 的剩余过期时间。当 key 不存在时，返回 -2 。 当 key 存在但没有设置剩余生存时间时，返回 -1 。 否则，以秒为单位，返回 key 的剩余生存时间。时间复杂度：O(1)<br>2. 在 Redis 2.8 以前，当 key 不存在，或者 key 没有设置剩余生存时间时，命令都返回 -1 。</td><td>&gt;= 1.0.0</td></tr><tr><td><code>pttl key</code></td><td>1. 该命令以毫秒为单位返回 key 的剩余过期时间。当 key 不存在时，返回 -2 。 当 key 存在但没有设置剩余生存时间时，返回 -1 。 否则，以秒为单位，返回 key 的剩余生存时间。时间复杂度：O(1)<br>2. 在 Redis 2.8 以前，当 key 不存在，或者 key 没有设置剩余生存时间时，命令都返回 -1 。</td><td>&gt;= 2.6.0</td></tr><tr><td><code>randomkey</code></td><td>该命令从当前数据库中随机返回(不删除)一个 <code>key</code> 。时间复杂度：O(1)。当数据库不为空时，返回一个 key 。当数据库为空时，返回 nil 。</td><td>&gt;= 1.0.0</td></tr><tr><td><code>rename key newkey</code></td><td>将 <code>key</code> 改名为 <code>newkey</code> 。时间复杂度：O(1)。改名成功时提示 OK ，当 <code>key</code> 和 <code>newkey</code> 相同，或者 <code>key</code> 不存在时，返回一个错误。当 <code>newkey</code> 已经存在时， <code>raname</code>命令将覆盖旧值。</td><td>&gt;= 1.0.0</td></tr><tr><td><code>renamenx key newkey</code></td><td>将 <code>key</code> 改名为 <code>newkey</code> 。时间复杂度：O(1)。当且仅当 <code>newkey</code> 不存在时，将 <code>key</code> 改名为 <code>newkey</code> 。修改成功时，返回 1 。当 <code>newkey</code> 存在时，返回 0 。当 <code>key</code> 不存在时，返回一个错误。</td><td>&gt;= 1.0.0</td></tr><tr><td><code>type key</code></td><td>返回 <code>key</code> 所储存的值的类型。时间复杂度：O(1)。none (key不存在)string (字符串)list (列表)set (集合)zset (有序集)hash (哈希表)</td><td>&gt;= 1.0.0</td></tr></tbody></table><h3 id="Redis键相关的其他命令"><a href="#Redis键相关的其他命令" class="headerlink" title="Redis键相关的其他命令"></a>Redis键相关的其他命令</h3><h4 id="migrate"><a href="#migrate" class="headerlink" title="migrate"></a>migrate</h4><h4 id="object"><a href="#object" class="headerlink" title="object"></a>object</h4><h4 id="restore"><a href="#restore" class="headerlink" title="restore"></a>restore</h4><h4 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h4><h4 id="scan"><a href="#scan" class="headerlink" title="scan"></a>scan</h4><h2 id="Redis-字符串-String-相关命令"><a href="#Redis-字符串-String-相关命令" class="headerlink" title="Redis 字符串(String)相关命令"></a>Redis 字符串(String)相关命令</h2><p>Redis 字符串数据类型的相关命令用于管理 redis 字符串值，基本语法如下：</p><h3 id="语法-3"><a href="#语法-3" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; COMMAND KEY_NAME</span><br></pre></td></tr></table></figure><h3 id="实例-4"><a href="#实例-4" class="headerlink" title="实例"></a>实例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set name redis</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get name</span><br><span class="line">&quot;redis&quot;</span><br></pre></td></tr></table></figure><h3 id="Redis字符串-String-相关的基本命令"><a href="#Redis字符串-String-相关的基本命令" class="headerlink" title="Redis字符串(String)相关的基本命令"></a>Redis字符串(String)相关的基本命令</h3><table><thead><tr><th>命令</th><th>描述</th><th>时间复杂度</th><th>可用版本</th></tr></thead><tbody><tr><td><code>set key value</code></td><td>1. 将字符串值 <code>value</code> 关联到 <code>key</code> 。如果 <code>key</code> 已经持有其他值， <code>set</code>就覆写旧值，无视类型。对于某个原本带有生存时间（TTL）的键来说， 当<code>set</code>命令成功在这个键上执行时， 这个键原有的 TTL 将被清除。<br>2. 在 Redis 2.6.12 以前版本， <code>set</code> 命令总是返回 OK 。从 Redis 2.6.12 版本开始，<code>set</code> 在设置操作成功完成时，才返回 OK 。如果设置了 <code>NX</code> 或者 <code>XX</code> ，但因为条件没达到而造成设置操作未执行，那么命令返回空批量回复（NULL Bulk Reply）。<br>3. 从 Redis 2.6.12 版本开始， <code>set</code>命令的行为可以通过一系列参数来修改：<code>EX</code>、<code>PX</code>、<code>NX</code>、<code>XX</code> 。<a href="http://doc.redisfans.com/string/set.html" target="_blank" rel="noopener">http://doc.redisfans.com/string/set.html</a></td><td>O(1)</td><td>&gt;= 1.0.0</td></tr><tr><td><code>get key</code></td><td>返回 <code>key</code> 所关联的字符串值。如果 <code>key</code> 不存在那么返回特殊值 <code>nil</code> 。假如 <code>key</code> 储存的值不是字符串类型，返回一个错误，因为<code>get</code>只能用于处理字符串值。</td><td>O(1)</td><td>&gt;= 1.0.0</td></tr><tr><td><code>getrange key start end</code></td><td>返回 <code>key</code> 中字符串值的子字符串，字符串的截取范围由 <code>start</code> 和 <code>end</code> 两个偏移量决定(包括 <code>start</code> 和 <code>end</code> 在内)。负数偏移量表示从字符串最后开始计数， <code>-1</code> 表示最后一个字符， <code>-2</code> 表示倒数第二个，以此类推。<code>getrange</code>通过保证子字符串的值域(range)不超过实际字符串的值域来处理超出范围的值域请求。</td><td>O(N)， N 为要返回的字符串的长度。复杂度最终由字符串的返回值长度决定，但因为从已有字符串中取出子字符串的操作非常廉价(cheap)，所以对于长度不大的字符串，该操作的复杂度也可看作O(1)。</td><td>&gt;= 2.4.0</td></tr><tr><td><code>getset key value</code></td><td>将给定 <code>key</code> 的值设为 <code>value</code> ，并返回 <code>key</code> 的旧值(old value)。当 <code>key</code> 存在但不是字符串类型时，返回一个错误。<code>key</code> 不存在时，返回 <code>nil</code>。</td><td>O(1)</td><td>&gt;= 1.0.0</td></tr><tr><td><code>incr key</code></td><td>1. 将 <code>key</code> 中储存的数字值增一。如果 <code>key</code> 不存在，那么 <code>key</code> 的值会先被初始化为 <code>0</code> ，然后再执行<code>incr</code>操作，返回执行命令之后 <code>key</code> 的值。如果值包含错误的类型，或字符串类型的值不能表示为数字，那么返回一个错误。<br>2. 本操作的值限制在 64 位(bit)有符号数字表示之内。这是一个针对字符串的操作，因为 Redis 没有专用的整数类型，所以 key 内储存的字符串被解释为十进制 64 位有符号整数来执行 <code>incr</code> 操作。<br>3. 限速器与计数器的应用。<br>4. <code>incrby key increment</code>、<code>incrbyfloat key increment</code>、<code>decr key</code>、<code>decrby key decrement</code>命令与之类似。<a href="http://doc.redisfans.com/string/incrbyfloat.html" target="_blank" rel="noopener">http://doc.redisfans.com/string/incrbyfloat.html</a></td><td>O(1)</td><td>&gt;= 1.0.0</td></tr><tr><td><code>getbit key offset</code></td><td>对 <code>key</code> 所储存的字符串值，获取指定偏移量上的位(bit)。当 <code>offset</code> 比字符串值的长度大，或者 <code>key</code> 不存在时，返回 <code>0</code> 。</td><td>O(1)</td><td>&gt;= 2.2.0</td></tr><tr><td><code>setbit key offset value</code></td><td>对 <code>key</code> 所储存的字符串值，设置或清除指定偏移量上的位(bit)。位的设置或清除取决于 <code>value</code> 参数，可以是 <code>0</code> 也可以是 <code>1</code> 。当 <code>key</code> 不存在时，自动生成一个新的字符串值。字符串会进行伸展(grown)以确保它可以将 <code>value</code> 保存在指定的偏移量上。当字符串值进行伸展时，空白位置以 <code>0</code> 填充。<br>2. <code>offset</code> 参数必须大于或等于 <code>0</code> ，小于 2^32 (bit 映射被限制在 512 MB 之内)。对使用大的 <code>offset</code> 的 <code>setbit</code>操作来说，内存分配可能造成 Redis 服务器被阻塞。具体参考<code>setrange</code>命令，warning(警告)部分。</td><td>O(1)</td><td>&gt;= 2.2.0</td></tr><tr><td><code>strlen key</code></td><td>返回 <code>key</code> 所储存的字符串值的长度。当 <code>key</code> 不存在时，返回 <code>0</code> 。当 <code>key</code> 储存的不是字符串值时，返回一个错误。</td><td>O(1)</td><td>&gt;= 2.2.0</td></tr><tr><td><code>mget key [key ...]</code></td><td>返回所有(一个或多个)给定 <code>key</code> 的值。如果给定的 <code>key</code> 里面，有某个 <code>key</code> 不存在，那么这个 <code>key</code> 返回特殊值 <code>nil</code> 。因此，该命令永不失败。</td><td>O(N) , N 为给定 key 的数量。</td><td>&gt;= 1.0.0</td></tr><tr><td><code>mset key value [key value ...]</code></td><td>1. 同时设置一个或多个 <code>key-value</code> 对。如果某个给定 <code>key</code> 已经存在，那么<code>mset</code>会用新值覆盖原来的旧值，如果这不是你所希望的效果，请考虑使用<code>msetnx</code>命令：它只会在所有给定 <code>key</code> 都不存在的情况下进行设置操作。<br>2. <code>mset</code>是一个原子性(atomic)操作，所有给定 <code>key</code> 都会在同一时间内被设置，某些给定 <code>key</code> 被更新而另一些给定 <code>key</code> 没有改变的情况，不可能发生。总是返回 OK (因为 MSET 不可能失败)</td><td>O(N)， N 为要设置的 key 数量。</td><td>&gt;= 1.0.1</td></tr><tr><td><code>msetnx key value [key value ...]</code></td><td>1. 同时设置一个或多个 <code>key-value</code> 对，当且仅当所有给定 <code>key</code> 都不存在。即使只有一个给定 <code>key</code> 已存在， <code>msetnx</code>也会拒绝执行所有给定 <code>key</code> 的设置操作。当所有 key 都成功设置，返回 1 。如果所有给定 key 都设置失败(至少有一个 key 已经存在)，那么返回 0 。<br>2. <code>msetnx</code>是原子性的，因此它可以用作设置多个不同 <code>key</code> 表示不同字段(field)的唯一性逻辑对象(unique logic object)，所有字段要么全被设置，要么全不被设置。</td><td>O(N)， N 为要设置的 key 数量。</td><td>&gt;= 1.0.1</td></tr><tr><td><code>append key value</code></td><td>1. 如果 <code>key</code> 已经存在并且是一个字符串， <code>append</code>命令将 <code>value</code> 追加到 <code>key</code> 原来的值的末尾。如果 <code>key</code> 不存在， <code>append</code>就简单地将给定 <code>key</code> 设为 <code>value</code> ，就像执行 <code>set key value</code> 一样。<br>2. 返回追加 value 之后， key 中字符串的长度。</td><td>平摊O(1)</td><td>&gt;= 2.0.0</td></tr></tbody></table><h3 id="Redis字符串-String-相关的其他命令"><a href="#Redis字符串-String-相关的其他命令" class="headerlink" title="Redis字符串(String)相关的其他命令"></a>Redis字符串(String)相关的其他命令</h3><h4 id="bitcount"><a href="#bitcount" class="headerlink" title="bitcount"></a>bitcount</h4><h4 id="bittop"><a href="#bittop" class="headerlink" title="bittop"></a>bittop</h4><h4 id="setrange"><a href="#setrange" class="headerlink" title="setrange"></a>setrange</h4><h4 id="set"><a href="#set" class="headerlink" title="set"></a>set</h4></div><footer class="post-footer"><div class="post-tags"><a href="/tags/Redis命令/" rel="tag"># Redis命令</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/posts/2c68463d/" rel="next" title="Redis配置与数据类型"><i class="fa fa-chevron-left"></i> Redis配置与数据类型</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"><a href="/posts/a9bf165e/" rel="prev" title="拾句-现实">拾句-现实 <i class="fa fa-chevron-right"></i></a></div></div></footer></div></article></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span> <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span> <span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap">站点概览</li></ul><div class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" src="/images/avatar.jpeg" alt="Muhouer"><p class="site-author-name" itemprop="name">Muhouer</p><div class="site-description motion-element" itemprop="description">斯人若彩红，遇上方知有有木有。</div></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a rel="external nofollow" href="/archives/"><span class="site-state-item-count">26</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"><a rel="external nofollow" href="/categories/"><span class="site-state-item-count">15</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"><a rel="external nofollow" href="/tags/"><span class="site-state-item-count">26</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="feed-link motion-element"><a rel="external nofollow" href="/atom.xml"><i class="fa fa-rss"></i> RSS</a></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/muhouer" title="GitHub &rarr; https://github.com/muhouer" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a> </span><span class="links-of-author-item"><a href="mailto:asher0918@163.com" title="E-Mail &rarr; mailto:asher0918@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a></span></div><div class="links-of-blogroll motion-element links-of-blogroll-inline"><div class="links-of-blogroll-title"><i class="fa fa-fw fa-link"></i> Links</div><ul class="links-of-blogroll-list"><li class="links-of-blogroll-item"><a href="https://bl.ocks.org/mbostock/3711652" title="https://bl.ocks.org/mbostock/3711652" rel="noopener" target="_blank">世界地图投影</a></li><li class="links-of-blogroll-item"><a href="http://www.chuangzaoshi.com/code" title="http://www.chuangzaoshi.com/code" rel="noopener" target="_blank">创造狮导航</a></li><li class="links-of-blogroll-item"><a href="https://hoxis.github.io/" title="https://hoxis.github.io/" rel="noopener" target="_blank">hoxis's blog</a></li></ul></div></div></div><div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis命令"><span class="nav-number">1.</span> <span class="nav-text">Redis命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">1.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">1.2.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在远程服务上执行命令"><span class="nav-number">2.</span> <span class="nav-text">在远程服务上执行命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实例-1"><span class="nav-number">2.1.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法-1"><span class="nav-number">2.2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例-2"><span class="nav-number">2.3.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-键-key-相关命令"><span class="nav-number">3.</span> <span class="nav-text">Redis 键(key)相关命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法-2"><span class="nav-number">3.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例-3"><span class="nav-number">3.2.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis键相关的基本命令"><span class="nav-number">3.3.</span> <span class="nav-text">Redis键相关的基本命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis键相关的其他命令"><span class="nav-number">3.4.</span> <span class="nav-text">Redis键相关的其他命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#migrate"><span class="nav-number">3.4.1.</span> <span class="nav-text">migrate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#object"><span class="nav-number">3.4.2.</span> <span class="nav-text">object</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#restore"><span class="nav-number">3.4.3.</span> <span class="nav-text">restore</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sort"><span class="nav-number">3.4.4.</span> <span class="nav-text">sort</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scan"><span class="nav-number">3.4.5.</span> <span class="nav-text">scan</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-字符串-String-相关命令"><span class="nav-number">4.</span> <span class="nav-text">Redis 字符串(String)相关命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法-3"><span class="nav-number">4.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例-4"><span class="nav-number">4.2.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis字符串-String-相关的基本命令"><span class="nav-number">4.3.</span> <span class="nav-text">Redis字符串(String)相关的基本命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis字符串-String-相关的其他命令"><span class="nav-number">4.4.</span> <span class="nav-text">Redis字符串(String)相关的其他命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bitcount"><span class="nav-number">4.4.1.</span> <span class="nav-text">bitcount</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bittop"><span class="nav-number">4.4.2.</span> <span class="nav-text">bittop</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setrange"><span class="nav-number">4.4.3.</span> <span class="nav-text">setrange</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#set"><span class="nav-number">4.4.4.</span> <span class="nav-text">set</span></a></li></ol></li></ol></li></ol></div></div></div><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span id="scrollpercent"><span>0</span>%</span></div></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><span id="sitetime"></span><script language="javascript">function siteTime(){window.setTimeout("siteTime()",1e3);var e=36e5,t=24*e,o=new Date,i=o.getFullYear(),a=o.getMonth()+1,n=o.getDate(),r=o.getHours(),l=o.getMinutes(),s=o.getSeconds(),M=Date.UTC(2019,6,25,9,0,0),g=Date.UTC(i,a,n,r,l,s)-M,m=Math.floor(g/31536e6),T=Math.floor(g/t-365*m),f=Math.floor((g-(365*m+T)*t)/e),h=Math.floor((g-(365*m+T)*t-f*e)/6e4),u=Math.floor((g-(365*m+T)*t-f*e-6e4*h)/1e3);document.getElementById("sitetime").innerHTML=" 嗯，我还在！已安全运行"+m+" 年 "+T+" 天 "+f+" 小时 "+h+" 分钟 "+u+" 秒"}siteTime()</script><div class="copyright">&copy; <span itemprop="copyrightYear">2019</span> <span class="with-love" id="animate"><i class="fa fa-user"></i> </span><span class="author" itemprop="copyrightHolder">Muhouer</span> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-area-chart"></i> </span><span title="站点总字数">75k</span> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-coffee"></i> </span><span title="站点阅读时长">1:08</span></div><div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div><span class="post-meta-divider">|</span><div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.2</div><div class="busuanzi-count"><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span class="post-meta-item-icon"><i class="fa fa-user"></i> </span><span class="site-uv" title="总访客量"><span class="busuanzi-value" id="busuanzi_value_site_uv"></span> </span><span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-eye"></i> </span><span class="site-pv" title="总访问量"><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span></div></div></footer></div><script>"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script><script src="/lib/jquery/index.js?v=3.4.1"></script><script src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script src="/lib/reading_progress/reading_progress.js"></script><script src="/js/utils.js?v=7.1.2"></script><script src="/js/motion.js?v=7.1.2"></script><script src="/js/affix.js?v=7.1.2"></script><script src="/js/schemes/pisces.js?v=7.1.2"></script><script src="/js/scrollspy.js?v=7.1.2"></script><script src="/js/post-details.js?v=7.1.2"></script><script src="/js/next-boot.js?v=7.1.2"></script><script>// Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });</script><script src="/lib/bookmark/bookmark.min.js?v=1.0"></script><script>bookmark.scrollToMark("auto","#更多")</script><script type="text/javascript" src="/js/click.js"></script></body></html>
