@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://muhouer.github.io/about/index.html</loc>
+    
+    <lastmod>2019-08-21T17:09:32.888Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://muhouer.github.io/posts/e93199a0/</loc>
     
     <lastmod>2019-08-21T17:06:37.972Z</lastmod>
@@ -355,13 +362,6 @@
     <loc>https://muhouer.github.io/posts/ce0f712d/</loc>
     
     <lastmod>2019-07-16T16:18:26.682Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://muhouer.github.io/about/index.html</loc>
-    
-    <lastmod>2019-07-14T13:38:17.765Z</lastmod>
     
   </url>
   
