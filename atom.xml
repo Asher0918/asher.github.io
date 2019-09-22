@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://muhouer.github.io/"/>
-  <updated>2019-09-22T15:41:06.287Z</updated>
+  <updated>2019-09-22T17:03:43.217Z</updated>
   <id>https://muhouer.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>DNS协议介绍</title>
+    <link href="https://muhouer.github.io/posts/13c9dbc5/"/>
+    <id>https://muhouer.github.io/posts/13c9dbc5/</id>
+    <published>2019-09-22T17:03:00.000Z</published>
+    <updated>2019-09-22T17:03:43.217Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><strong>DNS 协议</strong>也就是在做 DNS 解析时，客户端与服务端之间的通信协议。<strong>DNS 协议</strong>建立在 UDP 或 TCP 协议之上，默认使用 53 号端口。客户端默认通过 UDP 协议进行通讯，但是由于广域网中不适合传输过大的 UDP 数据包，因此规定当报文长度超过了 512 字节时，应转换为使用 TCP 协议进行数据传输。详见 <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank" rel="noopener">RFC1035 4.MESSAGES</a> 部分。</p><ul><li>客户端认为 UDP 响应包长度可能超过 512 字节，主动使用 TCP 协议；</li><li>客户端使用 UDP 协议发送 DNS 请求，服务端发现响应报文超过了 512 字节，在截断的 UDP 响应报文中将 TC 设置为 1 ，以通知客户端该报文已经被截断，客户端收到之后再发起一次 TCP 请求。</li></ul><h2 id="报文格式"><a href="#报文格式" class="headerlink" title="报文格式"></a>报文格式</h2><p>整个报文的格式如下，包括了五部分组成。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">+---------------------+</span><br><span class="line">|        Header       | 报文头，定义了报文是请求还是应答、错误码以及其它的一些标志位</span><br><span class="line">+---------------------+</span><br><span class="line">|       Question      | 查询请求，包括查询类型(QTYPE)、查询类(QCLASS) 以及查询的域名(QNAME)</span><br><span class="line">+---------------------+</span><br><span class="line">|        Answer       | 应答资源记录(RRs)</span><br><span class="line">+---------------------+</span><br><span class="line">|      Authority      | 授权资源记录(RRs)</span><br><span class="line">+---------------------+</span><br><span class="line">|      Additional     | 附加信息资源记录(RRs)</span><br><span class="line">+---------------------+</span><br></pre></td></tr></table></figure><h2 id="报文头"><a href="#报文头" class="headerlink" title="报文头"></a>报文头</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">                                1  1  1  1  1  1</span><br><span class="line">  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5</span><br><span class="line">+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+</span><br><span class="line">|                      ID                       |</span><br><span class="line">+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+</span><br><span class="line">|QR|   Opcode  |AA|TC|RD|RA|   Z    |   RCODE   |</span><br><span class="line">+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+</span><br><span class="line">|                    QDCOUNT                    |</span><br><span class="line">+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+</span><br><span class="line">|                    ANCOUNT                    |</span><br><span class="line">+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+</span><br><span class="line">|                    NSCOUNT                    |</span><br><span class="line">+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+</span><br><span class="line">|                    ARCOUNT                    |</span><br><span class="line">+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+</span><br></pre></td></tr></table></figure><p>字段含义如下:</p><table><thead><tr><th align="center">字段</th><th>备注</th></tr></thead><tbody><tr><td align="center">ID</td><td>16Bits ，用于生成任何类型的查询。响应报文会原样带回，用于客户端区分不同的请求应答。</td></tr><tr><td align="center">QR</td><td>1Bits，请求 (0 Question) ，应答 (1 Response)。</td></tr><tr><td align="center">Opcode</td><td>4Bits，设置查询的种类，0 标准查询 QUERY、1 反向查询 IQUERY、2 服务器状态查询 STATUS、3~15 保留。响应报文会原样带回。</td></tr><tr><td align="center">AA</td><td>1Bits，授权应答(AuthoritativeAnswer)，响应报文生效，用于标示服务器响应报文是否为授权服务器返回的结果，可能是在本地 Cache 的缓存。</td></tr><tr><td align="center">TC</td><td>1Bits，截断(TrunCation)，报文因为超过了允许的长度，导致被截断。</td></tr><tr><td align="center">RD</td><td>1Bits，用于请求中，期望使用递归查询。</td></tr><tr><td align="center">RA</td><td>1Bits，用于响应中，如果服务器支持递归查询则设置为 1 ，否则设置为 0 。</td></tr><tr><td align="center">RCODE</td><td>4Bits，应答码(ResponseCode)，会在响应报文中设置。含义如下：<br>0 没有错误；<br>1 报文格式错误(Format Error)，服务器解析请求报文时报错；<br>2 服务器失败(Server Failure)，因为服务器的原因导致没办法处理这个请求；<br>3 名字错误(Name Error)，只对授权域名解析服务器有意义，解析的域名不存在；<br>4 没有实现(Not Implemented)，域名服务器不支持查询类型；<br>5 拒绝(Refused)，由于服务器设置的策略拒绝给出应答，通常是安全的配置；<br>6-15 保留值，暂未使用。</td></tr><tr><td align="center">QDCOUNT</td><td>无符号16位整数，表示报文请求段中的问题记录数。</td></tr><tr><td align="center">ANCOUNT</td><td>无符号16位整数，表示报文回答段中的回答记录数。</td></tr><tr><td align="center">NSCOUNT</td><td>无符号16位整数，表示报文授权段中的授权记录数。</td></tr><tr><td align="center">ARCOUNT</td><td>无符号16位整数，表示报文附加段中的附加记录数。</td></tr></tbody></table><blockquote><p>为加快 DNS 的查询速度，一般会在服务端缓存一段时间，所以有可能 DNS 会返回缓存在 Cache 中的内容，那么此时就会将 AA 响应设置为 0 ，也就是是这里显示的 Non-authoritative answer 。</p></blockquote><h2 id="查询请求"><a href="#查询请求" class="headerlink" title="查询请求"></a>查询请求</h2><p>用来标识，查询的请求参数，同时需要在头中设置 <code>QDCOUNT</code> 这个字段。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">                                1  1  1  1  1  1</span><br><span class="line">  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5</span><br><span class="line">+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+</span><br><span class="line">|                                               |</span><br><span class="line">/                     QNAME                     /</span><br><span class="line">/                                               /</span><br><span class="line">+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+</span><br><span class="line">|                     QTYPE                     |</span><br><span class="line">+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+</span><br><span class="line">|                     QCLASS                    |</span><br><span class="line">+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+</span><br></pre></td></tr></table></figure><p>字段含义如下:</p><table><thead><tr><th>字段</th><th align="left">注释</th></tr></thead><tbody><tr><td>QNAME</td><td align="left">域名被表示为标签序列，每个标签包含一个字节表示后续字符串长度，以及这个字符串，以0长度和空字符串来表示域名结束。请注意，此字段可能是奇数个字节，不需要进行边界填充对齐。</td></tr><tr><td>QTYPE</td><td align="left">2个字节，表示查询类型，取值可以为任何可用的类型值，以及通配码来表示所有的资源记录。</td></tr><tr><td>QCLASS</td><td align="left">2个字节，表示查询的协议类，比如，IN代表Internet</td></tr></tbody></table><h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><h3 id="递归查询-VS-迭代查询"><a href="#递归查询-VS-迭代查询" class="headerlink" title="递归查询 VS. 迭代查询"></a>递归查询 VS. 迭代查询</h3><p>在递归查询模式下，DNS 服务器在接收到客户机请求时，必须使用一个准确的查询结果回复客户机。也就意味着，如果 DNS 服务器本地没有缓存所查询的 DNS 信息，那么该服务器会询问其它服务器，并将返回的查询结果提交给客户机。</p><p>而在使用迭代查询时，DNS 服务器会向客户机提供其它能够解析查询请求的 DNS 服务器地址。也就是说，当客户机发送查询请求时，DNS 服务器并不直接回复查询结果，而是告诉客户机另一台 DNS 服务器地址，客户机需要再向这台 DNS 服务器提交请求，依次循环直到返回查询的结果为止。</p><p>也就是说，关键的区别是由谁去查询最终的结果。</p><h3 id="DDoS"><a href="#DDoS" class="headerlink" title="DDoS"></a>DDoS</h3><p>发送大量的 DNS 递归查询会消耗服务端的一定资源，所以，只需要将发送的报文设置一个 RD 标志位即可。</p><p>当发送垃圾查询时，例如不存在的域名，必然会导致查询很慢。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;DNS 协议&lt;/strong&gt;也就是在做 DNS 解析时，客户端与服务端之间的通信协议。&lt;strong&gt;DNS 协议&lt;/st
+      
+    
+    </summary>
+    
+      <category term="通信协议" scheme="https://muhouer.github.io/categories/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/"/>
+    
+    
+      <category term="DNS" scheme="https://muhouer.github.io/tags/DNS/"/>
+    
+  </entry>
   
   <entry>
     <title>为什么数据库设计中要使用long来替换Date类型</title>
@@ -482,27 +507,6 @@
       
       
         &lt;h3 id=&quot;星星睡不着，在数人类。&quot;&gt;&lt;a href=&quot;#星星睡不着，在数人类。&quot; class=&quot;headerlink&quot; title=&quot;星星睡不着，在数人类。&quot;&gt;&lt;/a&gt;星星睡不着，在数人类。&lt;/h3&gt;&lt;ol&gt;&lt;li&gt;&lt;strong&gt;有一些小猫假扮成人类来跟我们相爱。&lt;/st
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>今天就和孩子签订一份成长协议</title>
-    <link href="https://muhouer.github.io/posts/9085c4b7/"/>
-    <id>https://muhouer.github.io/posts/9085c4b7/</id>
-    <published>2019-09-01T14:20:17.000Z</published>
-    <updated>2019-09-01T14:25:14.815Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>作者：连岳<br>原文链接： <a href="https://mp.weixin.qq.com/s/stMBnSo8YJKf5N2YEXrxdQ" target="_blank" rel="noopener">今天就和孩子签订一份成长协议</a></p></blockquote><p>一想到教育，任务繁重，多数人万千愁绪，不知从何抓起。但任务越重大，起点越要轻微。一点点改变，往往就能改变事物的性质。</p><p>有位家长提供了一份简单的成长协议，非常高明，值得推广：</p><img src="/images/201909011020.png" width="800px" height="300px" align="center"><p>初初一看，这没什么稀奇，开学之际，父母都会对孩子提出各种成长要求。这位家长提出的要求高得多，每天提早半小时到校，这个改变，孩子就算完成度只有50%，除了早上比同学更从容，更多一点学习时间，还意味着他更早睡，更早完成作业，效率更高，作息时间的细微调整，将重组一天的时间结构。</p><p>但是孩子提出了反制，这也不稀奇，当孩子被批评，被要求时，他们下意识的还击就是：那你自己如何如何。那你自己又做不到！是一句彻底激怒家长的话，羞愧、无能、耻辱、被冒犯、被伤害，一起发作，瞬间失去理智，家长将用强势地位压制孩子的反制，手段可能是物理或语言的暴力，或是各种辩解及转移话题，甚至流着泪说，要不是因为你耽误，我早就如何如何了。</p><p>家长的压制当然能成功，孩子依靠你生存，这是他天然的不利。但付出的代价，却是成功教育者两大要件的丧失，一是威信，二是真诚。这两大要件相辅相成，失去其一，另外一个也成立不了。</p><p>教育就是不停地讲道理，提要求。教育者本身的品德、能量令人敬佩，他讲道理事半功倍。一个天天玩手机的家长，警告孩子沉迷手机的危害，孩子当然认为你说假话。一个从不阅读，没有能力深阅读的家长，天天叨阅读的好处，必然没有任何效果，你只会学舌，他人说法的对错你都无法分辨，将一堆矛盾冲突的观点塞给孩子，他更加困惑，无所适从。</p><p>家长无法对孩子隐藏自己的真面目，你若不值得尊重，第一个瞧不起你的，就是传承你DNA的孩子。一旦你放纵、无能、愚蠢、不负责任，精神上的弑父（母）就在发生。无论你多么花言巧语，教育都失效了。说话的技巧并不是教育的根本，在孩子心目中有威信的父母，怎么说都有效，说话技术好，效果更好而已。</p><p>上面那位家长，接受孩子的反要求。有意无意，这迈出了质变的一小步。家长从孩子的要求中，可以发现自己忽视的缺点，那正是威信正在动摇的地方。同时有了被教育、被监督的弱势身份，在完成计划的过程中，可以体验学习与进步的艰难，不再只是轻松的动动嘴的教育者，和孩子一起学习， 一起成长，积累与交流这种经验就是不可替代的教育资源。而孩子突然有了教育者与监督者的强势身份，就像他小时候扮演老虎，他要表现得像只老虎，当他行使教育者与监督者职责时，他有了原来没有的视角与想法，这有利于他理解教育者。为了保有这份“权力”，他必须成为一个更好的学习者与履约者。</p><p>我建议家长与孩子坐下来谈一谈，有意识地赋予孩子反制权，签订一份合理的、双方认同的一起成长计划，双方互为教育者与被教育者，监督者与被监督者。根据完成度，执行相应的奖罚。我知道，很多家长也有阅读计划，锻炼计划，学习计划，以及各种其他计划，但是自律性差，往往虎头蛇尾。有个无情的监督者，尤其他是你的孩子，你不能输，那么，你计划的完成度将大大提升，你的人生，因为有了和孩子一起成长的具体约定与行动，将如开挂一般。</p><p>今天就订一个成长协议，虽然这对家长的要求更高了，但是一个负责任的家长，是不会怕的。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;&lt;p&gt;作者：连岳&lt;br&gt;原文链接： &lt;a href=&quot;https://mp.weixin.qq.com/s/stMBnSo8YJKf5N2YEXrxdQ&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;今天就和孩子签订一份成长协议&lt;/a&gt;&lt;
       
     
     </summary>
